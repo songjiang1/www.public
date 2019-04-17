@@ -1,0 +1,422 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@*~/Content/*@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/mui.min.css" />
+    <script type="text/javascript" src="~/Content/js/mui.min.js"></script>
+    <link rel="stylesheet" href="~/Content/css/home_page.css" />
+    <script type="text/javascript" src="~/Content/js/jquery-2.1.0.js"></script>
+
+    <link rel="stylesheet" href="~/Content/js/jqueryslk/css/public.css">
+    <link rel="stylesheet" href="~/Content/js/jqueryslk/swiper/css/swiper.min.css">
+    <script src="~/Content/js/jqueryslk/swiper/js/swiper.min.js"></script>
+    <script src="~/Content/js/jqueryslk/js/dySelect.js"></script>
+
+    <link href="~/Content/css/layer.css" rel="stylesheet" />
+    <script src="~/Content/js/plugins/layer/layer.js"></script>
+    <script src="~/Content/js/common/sys.common.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*图片上传*/
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            clear: both;
+        }
+
+        .z_photo {
+            width: 5rem;
+            height: auto;
+            overflow: auto;
+            clear: both;
+            /*padding: 0.3rem;
+            margin: 1rem auto;
+            border: 1px solid #555;*/
+        }
+
+            .z_photo img {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+
+        .z_addImg {
+            float: left;
+            margin-right: 0.2rem;
+            padding: 8px;
+        }
+
+        .z_file {
+            width: 1rem;
+            height: 1rem;
+            background: url(z_add.png) no-repeat;
+            background-size: 100% 100%;
+            float: left;
+            margin-right: 0.2rem;
+        }
+
+            .z_file input::-webkit-file-upload-button {
+                width: 1rem;
+                height: 1rem;
+                border: none;
+                position: absolute;
+                outline: 0;
+                opacity: 0;
+            }
+
+            .z_file input#file {
+                display: block;
+                width: auto;
+                border: 0;
+                vertical-align: middle;
+            }
+        /*遮罩层*/
+
+        .z_mask {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: none;
+        }
+
+        .z_alert {
+            width: 3rem;
+            height: 2rem;
+            border-radius: .2rem;
+            background: #fff;
+            font-size: .24rem;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -1.5rem;
+            margin-top: -2rem;
+        }
+
+            .z_alert p:nth-child(1) {
+                line-height: 1.5rem;
+            }
+
+            .z_alert p:nth-child(2) span {
+                display: inline-block;
+                width: 49%;
+                height: .5rem;
+                line-height: .5rem;
+                float: left;
+                border-top: 1px solid #ddd;
+            }
+
+        .z_cancel {
+            border-right: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class=" mui-icon mui-icon-left-nav mui-pull-left" href="LxBd.html">返回</a>
+        <h1 class="mui-title">快速发布</h1>
+        <div class="mui-icon mui-icon-more mui-pull-right"></div>
+    </header>
+    <div class="ksfb">
+        <div class="Ksfb_Select">
+            <h4>标题</h4>
+            <div class="Ks_op">
+
+                <div class="Ks_op_y"><span class="month" data-value="2019">2019</span><img src="images/daosanjiao.png"></div>
+                <div class="ks_op_jd"><span class="jidu" data-value="1">第一季度</span><img src="images/daosanjiao.png"></div>
+                <div class="ks_op_title"><span>双联系双报到</span></div>
+            </div>
+            <div class="Ks_Sr">
+                <textarea name="" rows="" cols="" maxlength="200" placeholder="文字描述(不能超过200字)"></textarea>
+            </div>
+            <div class="Ks_add_Img">
+                <div class="add_Ig">
+                    <div class="container"> 
+                        <span id="headImage">+</span>  
+                    </div> 
+                </div>
+                <div class="container"> 
+                    <!--    照片添加    -->
+                    <div class="z_photo">
+                        <div class="z_file" style="display:none;">
+                            <input  type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+
+                        </div>
+
+                    </div>
+
+                    <!--遮罩层-->
+
+                </div>
+
+            </div>
+            <!--遮罩层-->
+            <div class="z_mask" style="display:none;">
+                <!--弹出框-->
+                <div class="z_alert">
+                    <p>确定要删除这张图片吗？</p>
+                    <p>
+                        <span class="z_cancel">取消</span>
+                        <span class="z_sure">确定</span>
+                    </p>
+                </div>
+            </div>
+            <div class="ks_btn mui-btn mui-btn-primary">提交</div>
+            <div class="Ks_phone">
+                <ul>
+                    @*<li>拍照</li>*@
+                    <li data-value="1">从相册中选取</li>
+                    <li data-value="0">取消</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="select_box select_box1"></div>
+
+    <div class="select_box select_box2"></div>
+
+</body>
+</html>
+
+<script>
+
+    mui(document.body).on('tap', '.mui-btn', function (e) {
+        mui(this).button('loading');//切换为loading状态
+        setTimeout(function () {
+            mui(this).button('reset');//切换为reset状态(即重置为原始的button)
+        }.bind(this), 2000);
+    });
+
+    $(function () {
+        $("#headImage").click(function () {
+            $(".Ks_phone").css("display", "block");
+        });
+        $(".Ks_phone ul li").click(function () {
+
+            if ($(this).text() == "取消") {
+                $(".Ks_phone").css("display", "none");
+            }
+            if ($(this).attr("data-value") == "1") {
+                //$("#file").click();
+                $("#file").click()
+            }
+        });
+        
+
+    });
+    mui('body').on('tap', 'a', function () { document.location.href = this.href; });
+</script>
+<script>
+    var hgS1 = new selectSwiper({
+        el: '.select_box1',
+        el_b: ".el_b",
+        mustSelect: true, // 是否必选，默认false
+        activeIndex: 0,//默认激活项下标，默认值：-1
+        data: ['2019,2019', '2018,2018', '2017,2017'],//选项数据
+        init: function (index) {
+            if (index !== -1) {
+                $('.month').attr("data-value", this.data[index].split(',')[0]);
+                $('.month').html(this.data[index].split(',')[1]);
+            }
+        },
+        okFunUndefind: function () {//选择说明项-'请选择'
+            alert('必须选择一项');
+            return false;
+        },
+        okFun: function (index) {//确认按钮
+            console.log(index);
+            debugger;
+            $('.month').attr("data-value", this.data[index].split(',')[0]);
+            $('.month').html(this.data[index].split(',')[1]);
+        },
+        closeFun: function () {//取消按钮
+            //console.log('取消');
+        },
+    });
+    $('.month').on('click', function () {
+        hgS1.openSelectSwiper(); // 打开选择框
+    });
+
+
+    var hgS2 = new selectSwiper({
+        el: '.select_box2',
+        mustSelect: true, // 是否必选，默认false
+        activeIndex: 0,//默认激活项下标，默认值：-1
+        data: ['1,第一季度', '2,第二季度', '3,第三季度', '4,第四季度'],//选项数据
+        init: function (index) {
+            if (index !== -1) {
+                $('.jidu').attr("data-value", this.data[index].split(',')[0]);
+                $('.jidu').html(this.data[index].split(',')[1]);
+            }
+        },
+        okFunUndefind: function () {//选择说明项-'请选择'，mustSelect为true生效
+            alert('必须选择一项');
+            return false;
+        },
+        okFun: function (index) {//确认按钮
+            $('.jidu').attr("data-value", this.data[index].split(',')[0]);
+            $('.jidu').html(this.data[index].split(',')[1]);
+        },
+        closeFun: function () {//取消按钮
+            //console.log('取消');
+        },
+    });
+    $('.jidu').on('click', function () {
+        hgS2.openSelectSwiper(); // 打开选择框
+    });
+</script>
+<script type="text/javascript">
+    //px转换为rem
+    //$(function (doc, win) {
+    //    var docEl = doc.documentElement,
+    //        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    //        recalc = function () {
+    //            var clientWidth = docEl.clientWidth;
+    //            if (!clientWidth) return;
+    //            if (clientWidth >= 640) {
+    //                docEl.style.fontSize = '100px';
+    //            } else {
+    //                docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+    //            }
+    //        };
+
+    //    if (!doc.addEventListener) return;
+    //    win.addEventListener(resizeEvt, recalc, false);
+    //    doc.addEventListener('DOMContentLoaded', recalc, false);
+    //})(document, window);
+
+    var formData = []; 
+</script>
+<script>
+   
+    function imgChange(obj1, obj2) {
+        debugger;
+        //获取点击的文本框
+        var file = document.getElementById("file");
+        //存放图片的父级元素
+        var imgContainer = document.getElementsByClassName(obj1)[0];
+        //获取的图片文件
+        var fileList = file.files;
+
+        if (fileList.length > 4 || (parseInt($(".z_addImg").length) + parseInt(fileList.length)) > 4) {
+            forMsg('不能超过四张照片');
+            return false;
+        }
+        //文本框的父级元素
+        var input = document.getElementsByClassName(obj2)[0];
+        var imgArr = [];
+        //遍历获取到得图片文件
+        for (var i = 0; i < fileList.length; i++) {
+            var imgUrl = window.URL.createObjectURL(file.files[i]);
+            imgArr.push(imgUrl);
+            var img = document.createElement("img");
+            img.setAttribute("src", imgArr[i]);
+            var imgAdd = document.createElement("div");
+            imgAdd.setAttribute("class", "z_addImg");
+            imgAdd.appendChild(img);
+            imgContainer.appendChild(imgAdd);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                console.log("reader.onload")
+               // console.log(reader.result);  //或者 e.target.result都是一样的，都是base64码 
+            }
+            reader.readAsDataURL(fileList[i])
+            var imgg = {};
+            imgg.imageName = reader.result.substring(22);
+            formData.push(imgg); 
+            //if (imgUrl != 'undefined') {
+            //    var imgg = {};  
+            //    var image = new Image();
+            //    image.src = imgUrl;
+            //    var base64 = getBase64Image(image);
+            //    imgg.imageName = base64.split(',')[1];
+            //    //imgBase64.push(base64);
+            //    formData.push(imgg);
+            //}
+        }; 
+        imgRemove();
+        console.log(formData)
+    };
+
+    function imgRemove() {
+        var imgList = document.getElementsByClassName("z_addImg");
+        var mask = document.getElementsByClassName("z_mask")[0];
+        var cancel = document.getElementsByClassName("z_cancel")[0];
+        var sure = document.getElementsByClassName("z_sure")[0];
+        for (var j = 0; j < imgList.length; j++) {
+            imgList[j].index = j;
+            imgList[j].onclick = function () {
+                var t = this;
+                mask.style.display = "block";
+                cancel.onclick = function () {
+                    mask.style.display = "none";
+                };
+                sure.onclick = function () {
+                    mask.style.display = "none";
+                    t.style.display = "none";
+                };
+
+            }
+        };
+    };
+    function save() {
+        //var formData = new FormData($("#exeriseForm")[0]);
+        //var imgg = [];
+        //imgg = $('.z_addImg img');
+        //var imgSrc = [];
+        //var imgBase64 = [];
+        //for (var i = 0; i < imgg.length; i++) {
+        //    if (imgg[i].src != 'undefined') {
+        //        imgSrc.push(imgg[i].src) var image = new Image();
+        //        image.src = imgg[i].src;
+        //        var base64 = getBase64Image(image);
+        //        imgBase64.push(base64);
+        //        formData.append("imageName", base64.split(',')[1]);
+        //    }
+        //}
+    }
+    function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+        var dataURL = canvas.toDataURL("image/" + ext);
+        return dataURL;
+    }
+</script>
+
+<script>
+    $(".ks_btn").click(function() {
+        var month = $(".month").attr("data-value");
+        var jidu = $(".jidu").attr("data-value");
+
+    })
+</script>
+
+
+

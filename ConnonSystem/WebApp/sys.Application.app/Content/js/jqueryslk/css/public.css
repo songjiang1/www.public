@@ -1,0 +1,148 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.click_no {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .border {
+        border-width: 0.5px !important;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+    .border {
+        border-width: 0.333333px !important;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: '微软雅黑 Regular', '微软雅黑';
+    font-size: 0.14rem;
+    color: #333;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.w750 {
+    max-width: 750px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #F5F5F5;
+}
+
+.swiper-container, .selectData {
+    height: 2.5rem;
+}
+
+.swiper-slide {
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.3rem;
+    color: #ccc;
+}
+
+.swiper-slide:first-child {
+    color: #B7BABF;
+}
+
+.swiper-slide-prev, .swiper-slide-next {
+    font-size: 0.35rem;
+    color: #898B8F;
+}
+
+.swiper-slide-active {
+    font-size: 0.4rem;
+    color: #191919;
+}
+
+@keyframes fadeInUp1 {
+    100% {
+        bottom: 0;
+    }
+}
+
+.select_box {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.select_box.yes {
+    display: block;
+}
+
+.select_box .select {
+    height: 3.5rem;
+    overflow: auto;
+    text-align: center;
+    padding: 0.8rem 0.1rem 0.2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    background-color: #fff;
+}
+
+.select_box.yes .select {
+    animation: fadeInUp1 .3s ease-out;
+    animation-fill-mode: forwards;
+}
+
+.select_box.yes .select .close,
+.select_box.yes .select .ok {
+    color: #333;
+    font-size: 0.32rem;
+    position: absolute;
+    top: 0.2rem;
+}
+
+.select_box.yes .select .close {
+    left: 0.2rem;
+}
+
+.select_box.yes .select .ok {
+    right: 0.2rem;
+}
+
+.select_box.yes .select .cloth {
+    position: absolute;
+    height: 0.625rem;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    /*border-top: 1px solid #ccc;*/
+    /*border-bottom: 1px solid #ccc;*/
+    background-color: rgba(0, 0, 0, 0.05)
+}
